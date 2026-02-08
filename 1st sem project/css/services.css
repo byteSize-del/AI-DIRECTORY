@@ -1,0 +1,926 @@
+/* ===================================
+   MODERN UI IMPROVEMENTS - INDEX PAGE
+   ===================================
+   
+   KEY IMPROVEMENTS MADE:
+   1. Added modern Google Fonts (Poppins for headings, Inter for body)
+   2. Improved color contrast for better readability (WCAG AA compliant)
+   3. Made fully responsive with mobile-first approach
+   4. Added smooth animations and transitions
+   5. Implemented hamburger menu for mobile devices
+   6. Used CSS Grid for better layouts
+   7. Added hover effects with depth and shadows
+   8. Improved accessibility with proper focus states
+   9. Used CSS custom properties (variables) for easy theming
+   10. Added smooth scroll behavior
+*/
+
+/* ===================================
+   CSS CUSTOM PROPERTIES (Variables)
+   ===================================
+   Benefits: Easy to maintain colors, spacing, and sizes
+   Can change entire theme by modifying these values
+*/
+:root {
+    /* Color Palette: Modern, professional colors with good contrast */
+    --primary-color: #6366f1;        /* Indigo - modern, professional */
+    --primary-dark: #4f46e5;         /* Darker indigo for hover states */
+    --secondary-color: #8b5cf6;      /* Purple accent */
+    --accent-color: #ec4899;         /* Pink for highlights */
+    
+    /* Background colors with better contrast */
+    --bg-dark: #0f172a;              /* Very dark blue - easier to read */
+    --bg-darker: #1e293b;            /* Slightly lighter for cards */
+    --bg-light: #f8fafc;             /* Light background option */
+    
+    /* Text colors with proper contrast ratios */
+    --text-primary: #f1f5f9;         /* Off-white - easier on eyes than pure white */
+    --text-secondary: #cbd5e1;       /* Light gray for secondary text */
+    --text-muted: #94a3b8;           /* Muted gray for less important text */
+    
+    /* Spacing system: Consistent spacing throughout */
+    --spacing-xs: 0.5rem;    /* 8px */
+    --spacing-sm: 1rem;      /* 16px */
+    --spacing-md: 1.5rem;    /* 24px */
+    --spacing-lg: 2rem;      /* 32px */
+    --spacing-xl: 3rem;      /* 48px */
+    --spacing-2xl: 4rem;     /* 64px */
+    
+    /* Border radius for consistent rounded corners */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Shadows for depth - makes elements "float" */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    
+    /* Transitions for smooth animations */
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 300ms ease-in-out;
+    --transition-slow: 500ms ease-in-out;
+}
+
+/* ===================================
+   GLOBAL STYLES
+   =================================== */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Makes width calculations easier */
+}
+
+/* Smooth scrolling when clicking anchor links */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size for rem calculations */
+}
+
+body {
+    /* Modern font stack: Poppins from Google Fonts with fallbacks */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    /* Improved gradient with better colors and readability */
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1e1b4b 50%, #312e81 100%);
+    background-attachment: fixed; /* Parallax effect */
+    min-height: 100vh;
+    
+    /* Better text rendering on all browsers */
+    color: var(--text-primary);
+    line-height: 1.6; /* Improved readability */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+/* Container: Centers content and adds padding */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Remove default link styles */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-base);
+}
+
+/* Improve link accessibility with keyboard focus */
+a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+/* ===================================
+   NAVIGATION BAR
+   =================================== 
+   Improvements:
+   - Fixed height for consistency
+   - Better spacing and alignment
+   - Sticky positioning for easy access
+   - Glass morphism effect (blur + transparency)
+*/
+
+.header {
+    position: sticky; /* Stays at top when scrolling */
+    top: 0;
+    z-index: 1000; /* Ensures it stays above other content */
+    background: rgba(15, 23, 42, 0.8); /* Semi-transparent */
+    backdrop-filter: blur(12px); /* Glass morphism effect */
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-md);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo left, menu right */
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo styling - improved size and hover effect */
+.logo-link {
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-base);
+}
+
+.logo-link:hover {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.logo-1 {
+    height: 65px;  /* Balanced size for visibility */
+    width: 65px;
+    border-radius: var(--radius-md);
+    object-fit: cover; /* Ensures image fits properly */
+    transition: all var(--transition-base);
+}
+
+/* Hamburger Menu Button - shows only on mobile */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    transition: all var(--transition-base);
+    z-index: 1001;
+}
+
+.hamburger:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Navigation Links Container */
+.nav-links {
+    display: flex;
+    list-style: none; /* Remove bullet points */
+    gap: var(--spacing-sm); /* Space between items */
+    align-items: center;
+}
+
+/* Individual Navigation Links */
+.nav-link {
+    padding: var(--spacing-xs) var(--spacing-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px; /* Slight spacing for readability */
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    position: relative; /* For animated underline effect */
+}
+
+/* Animated underline on hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all var(--transition-base);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.nav-link:hover::after {
+    width: 80%; /* Underline expands on hover */
+}
+
+/* Active page indicator */
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* Special styling for Login button */
+.nav-link.login-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-lg);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+}
+
+.nav-link.login-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===================================
+   HERO SECTION
+   ===================================
+   Improvements:
+   - Larger, more impactful design
+   - Gradient text effect for modern look
+   - Better spacing and typography
+   - Icon added to CTA button
+   - Responsive scaling
+*/
+
+.hero-section {
+    min-height: 80vh; /* Takes most of viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background effect */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    animation: pulse 15s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+}
+
+/* Main Heading with Gradient Effect */
+.hero-title {
+    font-family: 'Poppins', sans-serif; /* Modern font for headings */
+    font-size: clamp(2.5rem, 8vw, 5rem); /* Responsive sizing */
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.1;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Gradient text effect - modern and eye-catching */
+.gradient-text {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Fade in animation for elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero description text */
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Call-to-Action Button */
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-xl);
+    
+    /* Gradient background for modern look */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    
+    /* Shadows for depth */
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    
+    transition: all var(--transition-base);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+    cursor: pointer;
+    border: none;
+}
+
+/* Hover effect - lifts and expands */
+.hero-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+}
+
+/* Active state when clicking */
+.hero-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Icon animation within button */
+.hero-btn i {
+    transition: transform var(--transition-base);
+}
+
+.hero-btn:hover i {
+    transform: translateX(5px); /* Arrow slides right on hover */
+}
+
+/* ===================================
+   FEATURES SECTION
+   ===================================
+   Improvements:
+   - Changed from inline-table to CSS Grid
+   - Better responsive behavior
+   - Added icons for visual interest
+   - Improved card design with hover effects
+   - Better spacing and readability
+*/
+
+.features-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    position: relative;
+}
+
+/* Grid layout - automatically adjusts columns based on screen size */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual Feature Card */
+.feature-card {
+    background: rgba(30, 41, 59, 0.6); /* Semi-transparent dark */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    
+    /* Smooth transitions for hover effects */
+    transition: all var(--transition-base);
+    
+    /* Animation: Cards fade in from bottom */
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Hover effect - card lifts and glows */
+.feature-card:hover {
+    transform: translateY(-10px); /* Lifts up */
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+    background: rgba(30, 41, 59, 0.8); /* Becomes more opaque */
+}
+
+/* Icon container with gradient background */
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: var(--radius-md);
+    
+    /* Gradient background for icons */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-lg);
+    
+    /* Icon color and size */
+    color: white;
+    font-size: 2rem;
+    
+    transition: all var(--transition-base);
+}
+
+/* Icon animation on card hover */
+.feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg); /* Slight zoom and rotation */
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+}
+
+/* Feature title */
+.feature-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Feature description text */
+.feature-description {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* ===================================
+   FOOTER SECTION
+   ===================================
+   Improvements:
+   - Better visual separation from content
+   - Modern icon styling with Font Awesome
+   - Better spacing and typography
+   - Hover effects on social icons
+*/
+
+.footer {
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.footer-description {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Social Media Icons Container */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Individual Social Icon Links */
+.social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-full);
+    
+    /* Gradient border effect */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+/* Hover effect - icon lifts and glows */
+.social-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+}
+
+/* Copyright text */
+.footer-copyright {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: var(--spacing-lg);
+}
+
+/* Heart emoji animation */
+.heart {
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    color: #ec4899;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ===================================
+   Mobile devices (phones): < 768px
+   Tablets: 768px - 1024px
+   Desktop: > 1024px
+*/
+
+/* Tablet and smaller screens */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: var(--spacing-md);
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    /* Show hamburger menu button */
+    .hamburger {
+        display: block;
+    }
+    
+    /* Hide navigation by default on mobile */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden off-screen */
+        width: 70%;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        
+        flex-direction: column; /* Stack vertically */
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-lg);
+        
+        transition: right var(--transition-slow);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Show menu when active class is added */
+    .nav-links.active {
+        right: 0; /* Slide in from right */
+    }
+    
+    /* Make nav links larger on mobile */
+    .nav-link {
+        font-size: 1.2rem;
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    /* Hero section adjustments */
+    .hero-section {
+        min-height: 70vh;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 1rem;
+    }
+    
+    /* Feature cards full width on mobile */
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer adjustments */
+    .social-icons {
+        gap: var(--spacing-sm);
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .logo-1 {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* ===================================
+   ACCESSIBILITY IMPROVEMENTS
+   ===================================
+   For users who prefer reduced motion
+*/
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #ffffff;
+        --bg-dark: #000000;
+    }
+}
+
+/* ===================================
+   SERVICES PAGE - PREMIUM CARD REDESIGN
+   ===================================
+   Modern Features:
+   - 3D hover effects with depth
+   - Glassmorphism design  
+   - Gradient overlays
+   - Smooth animations
+   - Premium button design
+   - Enhanced visual hierarchy
+*/
+
+.services-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+.services-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    background: linear-gradient(135deg, #fff, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-title {
+    position: relative;
+    padding-bottom: var(--spacing-md);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    border-radius: var(--radius-full);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 1400px;
+    margin: var(--spacing-2xl) auto 0;
+    padding: 0 var(--spacing-md);
+}
+
+/* Premium Service Card Design - Optimized */
+.service-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    will-change: transform;
+}
+
+/* 3D Hover Effect - Optimized */
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+}
+
+/* Removed expensive border animation for performance */
+
+/* Service Image with Gradient Overlay */
+.service-image {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(99, 102, 241, 0.15), 
+        rgba(168, 85, 247, 0.15));
+}
+
+.service-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.7) 100%);
+    z-index: 1;
+}
+
+/* Text-based Logo Styling - Optimized */
+.service-logo-text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: #fff;
+    background: linear-gradient(135deg, 
+        var(--primary-color) 0%, 
+        var(--secondary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: transform 0.3s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+.service-card:hover .service-logo-text {
+    transform: scale(1.05);
+}
+
+/* Service Content with Better Spacing */
+.service-content {
+    padding: var(--spacing-lg);
+    position: relative;
+}
+
+.service-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.service-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
+    min-height: 60px;
+}
+
+/* Premium Button Design - Optimized */
+.service-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.service-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.service-btn:active {
+    transform: translateY(0);
+}
+
+.service-btn i {
+    font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .services-section h2 {
+        font-size: 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0;
+    }
+    
+    .service-image {
+        height: 200px;
+    }
+    
+    .service-content {
+        padding: var(--spacing-md);
+    }
+    
+    .service-content h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-image {
+        height: 200px;
+    }
+}
