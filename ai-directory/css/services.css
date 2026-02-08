@@ -1,0 +1,1017 @@
+
+/* ===================================
+   CSS CUSTOM PROPERTIES (Variables)
+   ===================================
+   Benefits: Easy to maintain colors, spacing, and sizes
+   Can change entire theme by modifying these values
+*/
+:root {
+    /* Color Palette: Modern, professional colors with good contrast */
+    --primary-color: #6366f1;        /* Indigo - modern, professional */
+    --primary-dark: #4f46e5;         /* Darker indigo for hover states */
+    --secondary-color: #8b5cf6;      /* Purple accent */
+    --accent-color: #ec4899;         /* Pink for highlights */
+    
+    /* Background colors with better contrast */
+    --bg-dark: #0f172a;              /* Very dark blue - easier to read */
+    --bg-darker: #1e293b;            /* Slightly lighter for cards */
+    --bg-light: #f8fafc;             /* Light background option */
+    
+    /* Text colors with proper contrast ratios */
+    --text-primary: #f1f5f9;         /* Off-white - easier on eyes than pure white */
+    --text-secondary: #cbd5e1;       /* Light gray for secondary text */
+    --text-muted: #94a3b8;           /* Muted gray for less important text */
+    
+    /* Spacing system: Consistent spacing throughout */
+    --spacing-xs: 0.5rem;    /* 8px */
+    --spacing-sm: 1rem;      /* 16px */
+    --spacing-md: 1.5rem;    /* 24px */
+    --spacing-lg: 2rem;      /* 32px */
+    --spacing-xl: 3rem;      /* 48px */
+    --spacing-2xl: 4rem;     /* 64px */
+    
+    /* Border radius for consistent rounded corners */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Shadows for depth - makes elements "float" */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    
+    /* Transitions for smooth animations */
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 300ms ease-in-out;
+    --transition-slow: 500ms ease-in-out;
+}
+
+/* ===================================
+   GLOBAL STYLES
+   =================================== */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Makes width calculations easier */
+}
+
+/* Smooth scrolling when clicking anchor links */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size for rem calculations */
+}
+
+body {
+    /* Modern font stack: Poppins from Google Fonts with fallbacks */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    /* Improved gradient with better colors and readability */
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1e1b4b 50%, #312e81 100%);
+    background-attachment: fixed; /* Parallax effect */
+    min-height: 100vh;
+    
+    /* Better text rendering on all browsers */
+    color: var(--text-primary);
+    line-height: 1.6; /* Improved readability */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+/* Container: Centers content and adds padding */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Remove default link styles */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-base);
+}
+
+/* Improve link accessibility with keyboard focus */
+a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+/* ===================================
+   NAVIGATION BAR
+   =================================== 
+   Improvements:
+   - Fixed height for consistency
+   - Better spacing and alignment
+   - Sticky positioning for easy access
+   - Glass morphism effect (blur + transparency)
+*/
+
+.header {
+    position: sticky; /* Stays at top when scrolling */
+    top: 0;
+    z-index: 1000; /* Ensures it stays above other content */
+    background: rgba(15, 23, 42, 0.8); /* Semi-transparent */
+    backdrop-filter: blur(12px); /* Glass morphism effect */
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-md);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo left, menu right */
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo styling - improved size and hover effect */
+.logo-link {
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-base);
+}
+
+.logo-link:hover {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.logo-1 {
+    height: 65px;  /* Balanced size for visibility */
+    width: 65px;
+    border-radius: var(--radius-md);
+    object-fit: cover; /* Ensures image fits properly */
+    transition: all var(--transition-base);
+}
+
+/* Hamburger Menu Button - shows only on mobile */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    transition: all var(--transition-base);
+    z-index: 1001;
+}
+
+.hamburger:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Navigation Links Container */
+.nav-links {
+    display: flex;
+    list-style: none; /* Remove bullet points */
+    gap: var(--spacing-sm); /* Space between items */
+    align-items: center;
+}
+
+/* Individual Navigation Links */
+.nav-link {
+    padding: var(--spacing-xs) var(--spacing-md);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px; /* Slight spacing for readability */
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    position: relative; /* For animated underline effect */
+}
+
+/* Animated underline on hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all var(--transition-base);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.nav-link:hover::after {
+    width: 80%; /* Underline expands on hover */
+}
+
+/* Active page indicator */
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* Special styling for Login button */
+.nav-link.login-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-lg);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+}
+
+.nav-link.login-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===================================
+   HERO SECTION
+   ===================================
+   Improvements:
+   - Larger, more impactful design
+   - Gradient text effect for modern look
+   - Better spacing and typography
+   - Icon added to CTA button
+   - Responsive scaling
+*/
+
+.hero-section {
+    min-height: 80vh; /* Takes most of viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background effect */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    animation: pulse 15s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+}
+
+/* Main Heading with Gradient Effect */
+.hero-title {
+    font-family: 'Poppins', sans-serif; /* Modern font for headings */
+    font-size: clamp(2.5rem, 8vw, 5rem); /* Responsive sizing */
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.1;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Gradient text effect - modern and eye-catching */
+.gradient-text {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+    background-size: 200% auto;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Fade in animation for elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero description text */
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Call-to-Action Button */
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-xl);
+    
+    /* Gradient background for modern look */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    
+    /* Shadows for depth */
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    
+    transition: all var(--transition-base);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+    cursor: pointer;
+    border: none;
+}
+
+/* Hover effect - lifts and expands */
+.hero-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+}
+
+/* Active state when clicking */
+.hero-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Icon animation within button */
+.hero-btn i {
+    transition: transform var(--transition-base);
+}
+
+.hero-btn:hover i {
+    transform: translateX(5px); /* Arrow slides right on hover */
+}
+
+/* ===================================
+   FEATURES SECTION
+   ===================================
+   Improvements:
+   - Changed from inline-table to CSS Grid
+   - Better responsive behavior
+   - Added icons for visual interest
+   - Improved card design with hover effects
+   - Better spacing and readability
+*/
+
+.features-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    position: relative;
+}
+
+/* Grid layout - automatically adjusts columns based on screen size */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual Feature Card */
+.feature-card {
+    background: rgba(30, 41, 59, 0.6); /* Semi-transparent dark */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    
+    /* Smooth transitions for hover effects */
+    transition: all var(--transition-base);
+    
+    /* Animation: Cards fade in from bottom */
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Hover effect - card lifts and glows */
+.feature-card:hover {
+    transform: translateY(-10px); /* Lifts up */
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+    background: rgba(30, 41, 59, 0.8); /* Becomes more opaque */
+}
+
+/* Icon container with gradient background */
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: var(--radius-md);
+    
+    /* Gradient background for icons */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-lg);
+    
+    /* Icon color and size */
+    color: white;
+    font-size: 2rem;
+    
+    transition: all var(--transition-base);
+}
+
+/* Icon animation on card hover */
+.feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg); /* Slight zoom and rotation */
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+}
+
+/* Feature title */
+.feature-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Feature description text */
+.feature-description {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* ===================================
+   FOOTER SECTION
+   ===================================
+   Improvements:
+   - Better visual separation from content
+   - Modern icon styling with Font Awesome
+   - Better spacing and typography
+   - Hover effects on social icons
+*/
+
+.footer {
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.footer-description {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Social Media Icons Container */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Individual Social Icon Links */
+.social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-full);
+    
+    /* Gradient border effect */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+/* Hover effect - icon lifts and glows */
+.social-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+}
+
+/* Copyright text */
+.footer-copyright {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: var(--spacing-lg);
+}
+
+/* Heart emoji animation */
+.heart {
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    color: #ec4899;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ===================================
+   Mobile devices (phones): < 768px
+   Tablets: 768px - 1024px
+   Desktop: > 1024px
+*/
+
+/* Tablet and smaller screens */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: var(--spacing-md);
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    /* Show hamburger menu button */
+    .hamburger {
+        display: block;
+    }
+    
+    /* Hide navigation by default on mobile */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden off-screen */
+        width: 70%;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        
+        flex-direction: column; /* Stack vertically */
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-lg);
+        
+        transition: right var(--transition-slow);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Show menu when active class is added */
+    .nav-links.active {
+        right: 0; /* Slide in from right */
+    }
+    
+    /* Make nav links larger on mobile */
+    .nav-link {
+        font-size: 1.2rem;
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    /* Hero section adjustments */
+    .hero-section {
+        min-height: 70vh;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 1rem;
+    }
+    
+    /* Feature cards full width on mobile */
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer adjustments */
+    .social-icons {
+        gap: var(--spacing-sm);
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .logo-1 {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* ===================================
+   ACCESSIBILITY IMPROVEMENTS
+   ===================================
+   For users who prefer reduced motion
+*/
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #ffffff;
+        --bg-dark: #000000;
+    }
+}
+
+/* ===================================
+   SERVICES PAGE - AI TOOL CARDS
+   ===================================
+   This section styles the grid of AI tool cards.
+   Each card has: an image area at top, text content in middle, and a button at bottom.
+   Uses glassmorphism (frosted glass look) and gradient colors.
+*/
+
+/* Wrapper around the entire services section - adds space around it */
+.services-section {
+    padding: var(--spacing-2xl) var(--spacing-md); /* top/bottom and left/right spacing */
+}
+
+/* Page heading "Our AI Tools" - uses gradient text trick */
+.services-section h2 {
+    font-family: 'Poppins', sans-serif;   /* Modern heading font */
+    font-size: 2.5rem;                     /* Big heading size */
+    text-align: center;                    /* Centered on page */
+    color: var(--text-primary);            /* Fallback color */
+    margin-bottom: var(--spacing-sm);      /* Small gap below */
+    /* Gradient text trick: paint text with a gradient instead of solid color */
+    background: linear-gradient(135deg, #fff, var(--text-secondary));
+    -webkit-background-clip: text;         /* Clip gradient to text shape (Safari) */
+    -webkit-text-fill-color: transparent;  /* Make text transparent so gradient shows */
+    background-clip: text;                 /* Standard version of above */
+}
+
+/* Section title - used for section headings with a decorative underline */
+.section-title {
+    position: relative;                    /* Needed so the ::after line can be positioned */
+    padding-bottom: var(--spacing-md);     /* Space for the underline below */
+}
+
+/* Colored underline decoration below section titles */
+.section-title::after {
+    content: '';                           /* Required for ::after to appear */
+    position: absolute;                    /* Position it relative to .section-title */
+    bottom: 0;                             /* Stick to bottom edge */
+    left: 50%;                             /* Start at center */
+    transform: translateX(-50%);           /* Shift left by half its width to truly center */
+    width: 100px;                          /* Line width */
+    height: 4px;                           /* Line thickness */
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color)); /* Rainbow gradient line */
+    border-radius: var(--radius-full);     /* Fully rounded ends */
+}
+
+/* Card grid - auto-fills columns based on available width */
+.services-grid {
+    display: grid;                         /* CSS Grid layout for the cards */
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Auto-create columns, each at least 340px wide */
+    gap: 2rem;                             /* Space between cards */
+    max-width: 1400px;                     /* Don't stretch too wide on big screens */
+    margin: var(--spacing-2xl) auto 0;     /* Center grid horizontally, space above */
+    padding: 0 var(--spacing-md);          /* Side padding */
+}
+
+/* Individual AI tool card - uses glassmorphism (frosted glass) look */
+.service-card {
+    position: relative;                    /* Needed for the ::before gradient line */
+    display: flex;                         /* Flexbox to stack image + content vertically */
+    flex-direction: column;                /* Stack children top-to-bottom */
+    height: 100%;                          /* Fill full grid cell height (equal height cards) */
+    background: rgba(30, 41, 59, 0.6);    /* Semi-transparent dark background */
+    backdrop-filter: blur(10px);           /* Frosted glass blur effect */
+    border: 1.5px solid rgba(148, 163, 184, 0.1); /* Very subtle light border */
+    border-radius: 20px;                  /* Rounded corners */
+    overflow: hidden;                      /* Clip anything that goes outside the card */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth animation on hover */
+    /* Multiple shadows for realistic depth */
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),     /* Small close shadow */
+        0 10px 20px rgba(0, 0, 0, 0.15),   /* Larger spread shadow */
+        inset 0 1px 0 rgba(255, 255, 255, 0.05); /* Inner top highlight */
+}
+
+/* Gradient line at top of card - hidden by default, shown on hover */
+.service-card::before {
+    content: '';                           /* Required for pseudo-element */
+    position: absolute;                    /* Sits at top of card */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;                           /* Thin decorative line */
+    background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent); /* Gradient that fades at edges */
+    opacity: 0;                            /* Hidden by default */
+    transition: opacity 0.4s ease;         /* Fade in smoothly */
+}
+
+/* When user hovers over card - it lifts up, glows, and the top line appears */
+.service-card:hover {
+    transform: translateY(-12px) scale(1.02); /* Lift up 12px and grow slightly */
+    border-color: rgba(99, 102, 241, 0.3);    /* Border becomes more visible */
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),        /* Deeper shadow */
+        0 20px 40px rgba(99, 102, 241, 0.3),   /* Purple glow underneath */
+        inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Brighter top highlight */
+}
+
+/* Show the gradient line at top when card is hovered */
+.service-card:hover::before {
+    opacity: 1;                            /* Make the top line visible */
+}
+
+/* ---- Card Image Area ---- */
+/* Top section of card - decorative background where tool name appears */
+.service-image {
+    position: relative;                    /* Needed for the ::after pattern overlay */
+    width: 100%;                           /* Fill card width */
+    height: 200px;                         /* Fixed height for image area */
+    flex-shrink: 0;                        /* Don't shrink this section */
+    overflow: hidden;                      /* Hide anything that overflows */
+    /* Layered gradient background: two radial blobs + a base gradient */
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),  /* Blue blob left */
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.4) 0%, transparent 50%),   /* Purple blob right */
+        linear-gradient(135deg, #1e293b 0%, #0f172a 100%);  /* Dark base gradient */
+}
+
+/* Diagonal stripe pattern overlay on the image area - very subtle */
+.service-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;                              /* Cover entire parent (top/right/bottom/left = 0) */
+    /* Repeating diagonal stripes every 20px for texture */
+    background: 
+        repeating-linear-gradient(45deg, 
+            transparent, 
+            transparent 10px, 
+            rgba(99, 102, 241, 0.03) 10px,  /* Very faint indigo stripes */
+            rgba(99, 102, 241, 0.03) 20px);
+    pointer-events: none;                  /* Let clicks pass through to the card */
+}
+
+/* Tool name text displayed in the image area */
+.service-logo-text {
+    width: 100%;
+    height: 100%;
+    display: flex;                         /* Center the text */
+    align-items: center;                   /* Vertically centered */
+    justify-content: center;               /* Horizontally centered */
+    font-family: 'Poppins', sans-serif;    /* Modern font */
+    font-size: 1.75rem;                    /* Large text */
+    font-weight: 700;                      /* Bold */
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: #ffffff;
+    /* Glowing text shadow - makes text pop against dark background */
+    text-shadow: 
+        0 2px 10px rgba(99, 102, 241, 0.5),  /* Close blue glow */
+        0 0 30px rgba(139, 92, 246, 0.3);     /* Wider purple glow */
+    transition: all 0.3s ease;
+    letter-spacing: 1px;                   /* Slight spacing between letters */
+    position: relative;
+    z-index: 2;                            /* Show above the stripe pattern */
+}
+
+/* Logo text grows slightly when card is hovered */
+.service-card:hover .service-logo-text {
+    transform: scale(1.08);               /* Zoom in 8% */
+    text-shadow: 
+        0 2px 15px rgba(99, 102, 241, 0.8),  /* Stronger glow on hover */
+        0 0 40px rgba(139, 92, 246, 0.5);
+}
+
+/* ---- Card Text Content Area ---- */
+/* Bottom section of card with title, description, and button */
+.service-content {
+    display: flex;                         /* Flexbox for vertical stacking */
+    flex-direction: column;                /* Stack title, description, button top-to-bottom */
+    flex-grow: 1;                          /* Fill remaining card height (makes cards equal height) */
+    padding: 1.75rem;                      /* Inner spacing */
+    position: relative;
+    /* Subtle gradient background for the content area */
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+}
+
+/* AI tool name heading */
+.service-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    line-height: 1.3;                      /* Tight line height for headings */
+}
+
+/* Tool description paragraph */
+.service-content p {
+    color: var(--text-secondary);          /* Light gray text */
+    line-height: 1.8;                      /* Spacious line height for readability */
+    margin-bottom: 1.5rem;
+    font-size: 0.975rem;
+    flex-grow: 1;                          /* Pushes button to bottom of card */
+    opacity: 0.9;                          /* Slightly transparent for softer look */
+}
+
+/* ---- "Visit" Button ---- */
+/* Gradient button at the bottom of each card */
+.service-btn {
+    display: inline-flex;                  /* Flex to center icon + text */
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;                         /* Space between text and arrow icon */
+    width: 100%;                           /* Full width button */
+    padding: 0.875rem 1.5rem;
+    /* 3-color gradient: indigo → purple → pink */
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+    color: white;
+    text-decoration: none;                 /* Remove link underline */
+    border-radius: 12px;                   /* Rounded corners */
+    font-weight: 600;                      /* Semi-bold text */
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth hover animation */
+    /* Shadow + inner highlight for 3D look */
+    box-shadow: 
+        0 4px 15px rgba(99, 102, 241, 0.4),   /* Purple glow below */
+        inset 0 1px 0 rgba(255, 255, 255, 0.2); /* White line at top edge */
+    position: relative;
+    overflow: hidden;                      /* Hide the shine animation overflow */
+}
+
+/* Shine/sweep animation element - hidden off-screen by default */
+.service-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;                           /* Start completely off-screen to the left */
+    width: 100%;
+    height: 100%;
+    /* White shine that sweeps across the button */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+/* On hover, the shine sweeps from left to right across the button */
+.service-btn:hover::before {
+    left: 100%;                            /* Move to the right side */
+}
+
+/* Button hover: lifts up and glows more */
+.service-btn:hover {
+    transform: translateY(-3px);           /* Lift up slightly */
+    box-shadow: 
+        0 8px 25px rgba(99, 102, 241, 0.6),   /* Stronger glow */
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    /* Shift gradient to purple → pink → magenta */
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #c026d3 100%);
+}
+
+/* Button pressed down state */
+.service-btn:active {
+    transform: translateY(-1px);           /* Only slight lift when pressed */
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* Arrow icon inside the button */
+.service-btn i {
+    font-size: 0.875rem;
+    transition: transform 0.3s ease;
+}
+
+/* Arrow slides right when button is hovered */
+.service-btn:hover i {
+    transform: translateX(3px);            /* Move arrow 3px to the right */
+}
+
+/* ---- Services Page Responsive (Mobile) ---- */
+@media (max-width: 768px) {
+    /* Smaller heading on tablets */
+    .services-section h2 {
+        font-size: 2rem;
+    }
+    
+    /* Single column layout on small screens */
+    .services-grid {
+        grid-template-columns: 1fr;        /* One card per row */
+        gap: 1.5rem;
+        padding: 0;
+    }
+    
+    /* Slightly less rounded on mobile */
+    .service-card {
+        border-radius: 16px;
+    }
+    
+    /* Shorter image area on mobile */
+    .service-image {
+        height: 160px;
+    }
+    
+    .service-logo-text {
+        font-size: 1.5rem;
+    }
+    
+    .service-content {
+        padding: 1.5rem;
+    }
+    
+    .service-content h3 {
+        font-size: 1.35rem;
+    }
+    
+    .service-content p {
+        font-size: 0.925rem;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+    .services-grid {
+        grid-template-columns: 1fr;        /* Still one card per row */
+    }
+    
+    .service-logo-text {
+        font-size: 1.25rem;
+        padding: 1rem;
+    }
+    
+    .service-image {
+        height: 200px;
+    }
+}

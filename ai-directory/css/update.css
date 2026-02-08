@@ -1,0 +1,726 @@
+/* ===============================================
+   AI DIRECTORY - UPDATES PAGE STYLESHEET
+   Simple, attractive card-based layout
+   =============================================== */
+
+/* ===================================
+   CSS VARIABLES
+   =================================== */
+:root {
+    /* Colors */
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary-color: #8b5cf6;
+    --accent-color: #ec4899;
+    
+    /* Backgrounds */
+    --bg-dark: #0f172a;
+    --bg-darker: #1e293b;
+    
+    /* Text */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    
+    /* Border radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    
+    /* Transitions */
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 300ms ease-in-out;
+    --transition-slow: 500ms ease-in-out;
+}
+
+/* ===================================
+   BASE STYLES
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1e1b4b 50%, #312e81 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ===================================
+   NAVIGATION
+   =================================== */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-md);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-base);
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+.logo-1 {
+    height: 65px;
+    width: 65px;
+    border-radius: var(--radius-md);
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    transition: all var(--transition-base);
+    z-index: 1001;
+}
+
+.hamburger:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.nav-link {
+    padding: var(--spacing-xs) var(--spacing-md);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all var(--transition-base);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    animation: pulse 15s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+}
+
+.hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.1;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* ===================================
+   UPDATES SECTION - CARD GRID LAYOUT
+   ===================================
+   Shows recent and upcoming updates as cards in a responsive grid.
+   Each card has: colorful icon on top, title, date badge, description, and status badges.
+   Cards are grouped into sections like "Recent Updates" and "Upcoming Updates".
+*/
+
+/* Wrapper around the entire updates section */
+.updates {
+    padding: var(--spacing-2xl) var(--spacing-md); /* top/bottom and side spacing */
+}
+
+/* Centered content container */
+.container {
+    max-width: 1300px;                     /* Don't stretch too wide on big screens */
+    margin: 0 auto;                        /* Center horizontally */
+    padding: 0 var(--spacing-lg);          /* Side padding */
+}
+
+/* Page heading (e.g., "Latest Updates") */
+.section-title {
+    font-family: 'Poppins', sans-serif;    /* Modern heading font */
+    font-size: clamp(2rem, 4vw, 2.5rem);  /* Responsive size: min 2rem, max 2.5rem */
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    font-weight: 700;                      /* Bold */
+}
+
+/* Main outer grid - holds the section titles and card grids */
+.timeline {
+    display: grid;                         /* CSS Grid layout */
+    grid-template-columns: 1fr;            /* Single column - sections stack vertically */
+    gap: var(--spacing-xl);                /* Space between sections */
+}
+
+/* ---- Section Headers (e.g., "Recent Updates", "Upcoming Updates") ---- */
+.timeline-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);            /* White text */
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    position: relative;                    /* Needed for the colored underline */
+    padding-bottom: var(--spacing-sm);
+    grid-column: 1 / -1;                  /* Span full width of any grid */
+}
+
+/* Colored underline below section headers */
+.timeline-section-title::after {
+    content: '';                           /* Required for pseudo-element */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);           /* Center the line */
+    width: 80px;                           /* Line width */
+    height: 3px;                           /* Line thickness */
+    /* Gradient line: indigo → pink */
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: var(--radius-full);     /* Rounded ends */
+}
+
+/* ---- Card Grid ---- */
+/* Grid that holds the update cards - auto-adjusts columns */
+.timeline-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto columns, min 300px each */
+    gap: var(--spacing-lg);                /* Space between cards */
+    margin-bottom: var(--spacing-xl);
+}
+
+/* ---- Individual Update Card ---- */
+.timeline-item {
+    animation: fadeIn 0.6s ease-out;       /* Fade-in animation when page loads */
+    display: flex;                         /* Flexbox to stack icon + card vertically */
+    flex-direction: column;
+    align-items: center;                   /* Center icon above card */
+}
+
+/* Fade-in animation: slides up from below */
+@keyframes fadeIn {
+    from {
+        opacity: 0;                        /* Start invisible */
+        transform: translateY(20px);       /* Start 20px below */
+    }
+    to {
+        opacity: 1;                        /* End fully visible */
+        transform: translateY(0);          /* End at normal position */
+    }
+}
+
+/* ---- Colorful Circle Icon at Top of Each Card ---- */
+.timeline-icon {
+    width: 80px;                           /* Circle size */
+    height: 80px;
+    margin: 0 auto var(--spacing-md);      /* Center + space below */
+    border-radius: 50%;                    /* Perfect circle */
+    /* Default gradient: indigo → purple */
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;                         /* Center the icon inside */
+    align-items: center;
+    justify-content: center;
+    color: white;                          /* White icon color */
+    font-size: 2rem;                       /* Large icon */
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4); /* Colored glow */
+    transition: all var(--transition-base);
+}
+
+/* Each card gets a unique gradient color for variety */
+/* 2nd card: purple → pink */
+.timeline-item:nth-child(2) .timeline-icon {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* 3rd card: pink → orange */
+.timeline-item:nth-child(3) .timeline-icon {
+    background: linear-gradient(135deg, #ec4899, #f97316);
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+}
+
+/* 4th card: orange → yellow */
+.timeline-item:nth-child(4) .timeline-icon {
+    background: linear-gradient(135deg, #f97316, #fbbf24);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+}
+
+/* 5th card: green → cyan */
+.timeline-item:nth-child(5) .timeline-icon {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* When card is hovered, icon lifts and tilts */
+.timeline-item:hover .timeline-icon {
+    transform: translateY(-5px) rotate(5deg); /* Lift up + slight rotation */
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.6); /* Stronger glow */
+}
+
+/* ---- Card Body (Content Box) ---- */
+/* The main card container - glassmorphism style */
+.timeline-content {
+    background: rgba(30, 41, 59, 0.6);    /* Semi-transparent dark background */
+    backdrop-filter: blur(15px);           /* Frosted glass blur effect */
+    padding: var(--spacing-xl);            /* Inner spacing */
+    border-radius: var(--radius-lg);       /* Rounded corners */
+    border: 1px solid rgba(148, 163, 184, 0.15); /* Very subtle border */
+    transition: all var(--transition-base); /* Smooth hover animation */
+    text-align: center;                    /* Center all text */
+    width: 100%;                           /* Fill the grid cell width */
+    flex: 1;                               /* Stretch to fill height (equal height cards) */
+    display: flex;                         /* Flexbox to push footer to bottom */
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Card hover: lifts up and glows */
+.timeline-content:hover {
+    transform: translateY(-10px);          /* Lift up 10px */
+    background: rgba(30, 41, 59, 0.8);    /* Slightly more opaque */
+    border-color: rgba(99, 102, 241, 0.5); /* Indigo border appears */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Deep shadow */
+}
+
+/* Header area inside card (title + date) */
+.timeline-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Card title (update name) */
+.timeline-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--text-primary);            /* White text */
+    font-weight: 700;
+}
+
+/* Date badge - small pill-shaped tag showing when the update was published */
+.timeline-content .date {
+    font-size: 0.85rem;
+    color: var(--primary-color);           /* Indigo text */
+    font-weight: 600;
+    display: inline-flex;                  /* Icon + text side by side */
+    align-items: center;
+    gap: 0.4rem;                           /* Space between calendar icon and date */
+    background: rgba(99, 102, 241, 0.1);  /* Very light indigo background */
+    padding: 0.3rem 0.8rem;               /* Small padding */
+    border-radius: var(--radius-full);     /* Pill shape */
+}
+
+/* Calendar icon inside date badge */
+.timeline-content .date i {
+    font-size: 0.75rem;                    /* Small icon */
+}
+
+/* Description paragraph in the card */
+.timeline-description {
+    color: var(--text-secondary);          /* Light gray text */
+    line-height: 1.7;                      /* Spacious lines for readability */
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95rem;
+    flex-grow: 1;                          /* Takes up remaining space (pushes footer down) */
+    width: 100%;
+}
+
+/* ---- Card Footer (Status Badges) ---- */
+/* Container for badges at the bottom of each card */
+.timeline-footer {
+    display: flex;                         /* Badges side by side */
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);                /* Space between badges */
+    flex-wrap: wrap;                       /* Wrap to next line if too many */
+    margin-top: auto;                      /* Push to bottom of card */
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(148, 163, 184, 0.1); /* Thin divider line */
+    width: 100%;
+}
+
+/* ---- Status Badges (e.g., "New", "Coming Soon", "Planned") ---- */
+/* Base badge style - small pill-shaped labels */
+.badge {
+    display: inline-flex;                  /* Icon + text side by side */
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-full);     /* Pill shape */
+    font-size: 0.75rem;                    /* Small text */
+    font-weight: 600;                      /* Semi-bold */
+    transition: all var(--transition-base);
+}
+
+.badge i {
+    font-size: 0.7rem;                     /* Tiny icon inside badge */
+}
+
+/* "New" badge - green → cyan gradient */
+.badge.new {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); /* Green glow */
+}
+
+/* "Coming Soon" badge - indigo → purple gradient */
+.badge.coming {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); /* Purple glow */
+}
+
+/* "Planned" badge - pink → orange gradient */
+.badge.planned {
+    background: linear-gradient(135deg, var(--accent-color), #f97316);
+    color: white;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3); /* Pink glow */
+}
+
+/* Default badge (any badge without new/coming/planned class) */
+.badge:not(.new):not(.coming):not(.planned) {
+    background: var(--bg-darker);          /* Dark gray background */
+    color: var(--text-secondary);          /* Light gray text */
+}
+
+/* Category tags - small uppercase labels (e.g., "UI", "FEATURE") */
+.category-tag {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-full);     /* Pill shape */
+    font-size: 0.7rem;                     /* Very small text */
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.1);  /* Light indigo background */
+    color: var(--primary-color);           /* Indigo text */
+    border: 1px solid rgba(99, 102, 241, 0.2); /* Subtle indigo border */
+    text-transform: uppercase;             /* ALL CAPS */
+    letter-spacing: 0.5px;                 /* Slight letter spacing */
+}
+
+/* ===================================
+   FUTURE PLANS SECTION
+   ===================================
+   Grid of cards showing planned features.
+   Each card: icon circle on top, title, and description.
+*/
+
+/* Section wrapper with darker background to visually separate it */
+.future-plans {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    background: rgba(15, 23, 42, 0.5);    /* Slightly darker overlay */
+}
+
+/* Grid for plan cards - auto columns, min 250px each */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+/* Individual plan card - glassmorphism style */
+.plan-card {
+    background: rgba(30, 41, 59, 0.6);    /* Semi-transparent dark */
+    backdrop-filter: blur(10px);           /* Frosted glass blur */
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);       /* Rounded corners */
+    border: 1px solid rgba(148, 163, 184, 0.1); /* Very subtle border */
+    text-align: center;
+    transition: all var(--transition-base);
+    display: flex;                         /* Stack icon + text vertically */
+    flex-direction: column;
+    align-items: center;                   /* Center everything */
+}
+
+/* Plan card hover: lifts up and glows */
+.plan-card:hover {
+    transform: translateY(-10px);          /* Lift up 10px */
+    background: rgba(30, 41, 59, 0.8);    /* More opaque */
+    border-color: var(--primary-color);    /* Indigo border */
+    box-shadow: var(--shadow-xl);          /* Deep shadow */
+}
+
+/* Circle icon at top of plan card */
+.plan-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-md);      /* Center + space below */
+    border-radius: 50%;                    /* Perfect circle */
+    /* Gradient: indigo → purple */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;                         /* Center icon inside */
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    transition: all var(--transition-base);
+}
+
+/* Icon zooms and rotates when card is hovered */
+.plan-card:hover .plan-icon {
+    transform: scale(1.1) rotate(10deg);   /* Grow 10% and rotate 10 degrees */
+}
+
+/* Plan card title */
+.plan-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);            /* White text */
+}
+
+/* Plan card description */
+.plan-card p {
+    color: var(--text-secondary);          /* Light gray text */
+    line-height: 1.6;                      /* Comfortable reading */
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+/* Simple footer with copyright text */
+.footer {
+    background: rgba(15, 23, 42, 0.8);    /* Dark semi-transparent */
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid rgba(148, 163, 184, 0.1); /* Thin divider line */
+}
+
+.footer p {
+    color: var(--text-muted);              /* Muted gray text */
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   ===================================
+   Adjusts layout for smaller screens.
+*/
+
+/* Tablets (screens 768px or smaller) */
+@media (max-width: 768px) {
+    /* Show hamburger menu button on mobile */
+    .hamburger {
+        display: block;
+    }
+    
+    /* Mobile nav menu - slides in from right */
+    .nav-links {
+        position: fixed;                   /* Fixed overlay */
+        top: 0;
+        right: -100%;                      /* Hidden off-screen to the right */
+        width: 70%;                        /* Takes 70% of screen width */
+        height: 100vh;                     /* Full height */
+        background: rgba(15, 23, 42, 0.98); /* Nearly opaque dark background */
+        backdrop-filter: blur(20px);       /* Blur behind menu */
+        flex-direction: column;            /* Stack links vertically */
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-lg);
+        transition: right var(--transition-slow); /* Smooth slide animation */
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* When menu is open, slide it into view */
+    .nav-links.active {
+        right: 0;                          /* Slide to visible position */
+    }
+    
+    /* Larger nav links for easy tapping on mobile */
+    .nav-link {
+        font-size: 1.2rem;
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    /* Shorter hero on mobile */
+    .hero-section {
+        min-height: 70vh;
+    }
+    
+    /* Single column cards on small screens */
+    .timeline-section {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Slightly smaller icons on mobile */
+    .timeline-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.7rem;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Small phones (screens 480px or smaller) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: var(--spacing-md);
+    }
+    
+    /* Smaller logo on tiny screens */
+    .logo-1 {
+        height: 50px;
+        width: 50px;
+    }
+    
+    /* Even shorter hero */
+    .hero-section {
+        min-height: 60vh;
+    }
+    
+    /* Still single column */
+    .timeline-section {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Smaller section headings */
+    .timeline-section-title {
+        font-size: 1.1rem;
+    }
+    
+    /* Even smaller icons */
+    .timeline-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+    }
+    
+    /* Less padding inside cards */
+    .timeline-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .timeline-description {
+        font-size: 0.9rem;
+    }
+    
+    /* Smaller badges and tags on tiny screens */
+    .badge, .category-tag {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.7rem;
+    }
+    
+    /* Single column for future plans too */
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+}
